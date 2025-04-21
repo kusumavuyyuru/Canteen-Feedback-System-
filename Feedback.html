@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Radio Button Group Check</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f9;
+        }
+        .emoji {
+            font-size: 30px;
+        }
+        button {
+            padding: 12px 20px;
+            margin-top: 15px;
+            width: 30%;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .myimg {
+            width: 15px;
+            height: 15px;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        function validateAndSubmit() {
+            // Get all radio inputs inside the form
+            const radios = document.querySelectorAll("#feedbackForm input[type='radio']");
+            let atLeastOneChecked = false;
+
+            for (const radio of radios) {
+                if (radio.checked) {
+                    atLeastOneChecked = true;
+                    break;
+                }
+            }
+
+            if (atLeastOneChecked) {
+                document.getElementById("feedbackForm").submit();
+            } else {
+                alert("Please select at least one feedback option before submitting!");
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <img class="img" style="width:100%;margin:auto;height:150px;" src="./Canteen Feedback System_files/head.jpg">
+</div>
+<div class="container">
+    <form id="feedbackForm" action="http://localhost:80/canteenpvm/postfeedback.php" method="POST">
+        <h3 style="width:70%;margin:auto;">Your Feedback is very valuable to improve the quality of our food items</h3>
+        <br>
+        <div class="container">
+            <div class="col-sm-6">
+                <br>
+                <table style="width:50%;margin:auto;">
+                    <tr>
+                        <th>Items</th>
+                        <th>Good</th>
+                        <th>Average</th>
+                        <th>Bad</th>
+                    </tr>
+
+                    <tr>
+                        <td>Idly</td>
+                        <td><input type="radio" name="item1" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item1" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"> </td>
+                        <td><input type="radio" name="item1" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Sambar</td>
+                        <td><input type="radio" name="item2" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item2" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"></td>
+                        <td><input type="radio" name="item2" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Poori</td>
+                        <td><input type="radio" name="item3" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item3" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"></td>
+                        <td><input type="radio" name="item3" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Dosa</td>
+                        <td><input type="radio" name="item4" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item4" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"></td>
+                        <td><input type="radio" name="item4" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Curry</td>
+                        <td><input type="radio" name="item5" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item5" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"></td>
+                        <td><input type="radio" name="item5" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Chutney</td>
+                        <td><input type="radio" name="item6" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item6" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"> </td>
+                        <td><input type="radio" name="item6" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>FriedRice</td>
+                        <td><input type="radio" name="item7" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item7" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"> </td>
+                        <td><input type="radio" name="item7" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Chapati</td>
+                        <td><input type="radio" name="item8" value="3"> <img class="myimg" src="Canteen Feedback System_files/good.svg"></td>
+                        <td><input type="radio" name="item8" value="2"> <img class="myimg" src="Canteen Feedback System_files/avg.svg"> </td>
+                        <td><input type="radio" name="item8" value="1"> <img class="myimg" src="Canteen Feedback System_files/bad.svg"></td>
+                    </tr>
+                </table>
+                <p><button type="button" onclick="validateAndSubmit()">Submit</button></p>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

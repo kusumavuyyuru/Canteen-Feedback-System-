@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank You!</title>
+  <!-- Load canvas-confetti from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      overflow: hidden;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+    /* Header using the header image */
+    header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 150px;
+      background: url('Canteen Feedback System_files/head.jpg') no-repeat center center;
+      background-size: cover;
+      z-index: 3;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    header img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+    /* Thank You Container */
+    .thank-container {
+      background: #fff;
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      z-index: 2;
+      position: relative;
+      margin-top: 150px; /* Leave space for header */
+    }
+    .thank-container h1 {
+      font-size: 1.8rem;
+      color: #333;
+      margin-top: 20px;
+    }
+    /* Checkmark Animation (SVG) */
+    .checkmark {
+      width: 100px;
+      height: 100px;
+      display: block;
+      margin: 0 auto;
+    }
+    .checkmark__circle {
+      stroke: #4CAF50;
+      stroke-width: 3;
+      fill: none;
+    }
+    .checkmark__check {
+      stroke: #4CAF50;
+      stroke-width: 5;
+      fill: none;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: draw 0.8s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+    /* Confetti Animation with Higher Reach */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      opacity: 0.9;
+      transform: rotate(45deg);
+      animation: confettiRise 3s ease-out forwards;
+      z-index: 1;
+    }
+
+    @keyframes confettiRise {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with header image -->
+  <header></header>
+  
+  <!-- Thank You Container with Animated Checkmark -->
+  <div class="thank-container">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+      <circle class="checkmark__circle" cx="26" cy="26" r="25" />
+      <path class="checkmark__check" d="M14 27l7 7 16-16"/>
+    </svg>
+    <h1>Thank You for Your Feedback!</h1>
+  </div>
+  
+  <!-- Audio for Success Sound -->
+  <audio id="successSound" src="feedback_voice.mp3"></audio>
+  
+  <script>
+    // Function to play the success sound and log events.
+    function playSuccessSound() {
+      const sound = document.getElementById("successSound");
+      if (sound) {
+        sound.volume = 1.0; // Ensure volume is set
+        sound.play().catch(e => console.log("Sound playback blocked, waiting for user interaction.", e));
+      }
+    }
+
+    // Attach event listener to the body
+    document.body.addEventListener("click", () => {
+      playSuccessSound();
+    }, { once: true });
+
+    // Attempt to play sound as soon as the page loads.
+    window.addEventListener("load", function() {
+      playSuccessSound();
+    });
+
+    // Confetti Animation Trigger
+    const confettiInterval = setInterval(() => {
+      confetti({
+        particleCount: 100,
+        startVelocity: 25,
+        spread: 100,
+        origin: { x: 0, y: 1 },
+        ticks: 200,
+        colors: ['#FF69B4', '#32CD32', '#1E90FF']
+      });
+
+      confetti({
+        particleCount: 100,
+        startVelocity: 25,
+        spread: 100,
+        origin: { x: 1, y: 1 },
+        ticks: 200,
+        colors: ['#FF69B4', '#32CD32', '#1E90FF']
+      });
+    }, 900);
+
+    // Stop confetti after 6-7 seconds.
+    setTimeout(() => {
+      clearInterval(confettiInterval);
+      console.log("Confetti animation completed.");
+    }, 7000);
+
+    // Redirect to the main page after 7 seconds.
+    setTimeout(() => {
+      console.log("Redirecting to index.html...");
+      window.location.href = "https://pvpsit-canteen-feedback.rf.gd/";
+    }, 7000);
+  </script>
+</body>
+</html>

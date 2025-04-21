@@ -1,0 +1,44 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$q1 = $_POST['behavioue of staff'] ?? null;
+$q2 = $_POST['food quality'] ?? null;
+$q3 = $_POST['service'] ?? null;
+
+
+// Database connection settings
+
+$servername = "localhost";
+$db_username = "root";
+$db_password = "";
+$dbname = "servicedb";
+
+
+// FIX: Use correct variable names here
+$conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get current date and time
+date_default_timezone_set('Asia/Kolkata');
+$date = date("Y-m-d");
+$time = date("H:i:s");
+
+// Insert feedback into database
+$sql = "INSERT INTO serviceform (behaviour of staff, food quality, service, feedback_date, feedback_time) 
+        VALUES ('$q1', '$q2', '$q3', '$date', '$time')";
+
+if ($conn->query($sql) === TRUE) {
+    // Redirect to thank you page after successful insertion
+    header("Location: ../serviceform.html");
+    exit(); // Ensure no further code is executed after the redirect
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>

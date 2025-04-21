@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 1200px;
+            width: 95%;
+            margin-top:20px;
+            text-align: center;
+        }
+        h2 {
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+        select, input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+        }
+        select, input {
+            background: #f8f9fa;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        .no-data {
+            display: none;
+            color: red;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>📊Feedback Analysis</h2>
+
+        <div class="col-sm-9">
+            <label for="chartType">Select Feedback Type:</label>
+             <select id="chartType">
+            <option value="bar_chart">📶 No of ratings given per item </option>
+            <option value="leaderboard">🏆 Top & Bottom Rated Items of the day</option>
+        </select>
+
+            <label for="date">Select Date:</label>
+            <input type="date" id="date">
+
+            <label for="hour">Hour (Optional):</label>
+            <input type="number" id="hour" min="0" max="23" placeholder="0-23">
+        </div>
+
+        <button onclick="fetchFeedbackData()">📊Show Chart</button>
+
+         <div class="loading">⏳ Loading data, please wait...</div>
+        <div class="no-data">⚠ No data available for the selected time or day.</div>
+
+        <canvas id="feedbackChart"></canvas>
+    </div>
+
+    <script>
+        let chartInstance = null;
+
+        function fetchFeedbackData() {
+            const chartType = document.getElementById("chartType").value;
+            const date = document.getElementById("date").value;
+            const hour = document.getElementById("hour").value;
+            const loadingText = document.querySelector(".loading");
+            const noDataText = document.querySelector(".no-data");
+            
+            if (!date) {
+                alert("Please select a date.");
+                return;
+            }
+
+            loadingText.style.display = "block";
+            noDataText.style.display = "none";
+
+            let url = fetch_feedback_data1.php?type=${chartType}&date=${date};
+            if (hour !== "") url += &hour=${hour};
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    loadingText.style.display = "none";
+
+                    if (!data || Object.keys(data).length === 0) {
+                        noDataText.style.display = "block";
+                        if (chartInstance) chartInstance.destroy();
+                        return;
+                    }
+
+                    renderChart(chartType, data);
+                })
+                .catch(error => {
+                    loadingText.style.display = "none";
+                    noDataText.style.display = "block";
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+        function renderChart(chartType, data) {
+            const ctx = document.getElementById("feedbackChart").getContext("2d");
+            if (chartInstance) chartInstance.destroy();
+
+            if (chartType === "bar_chart" ) {
+                const labels = Object.keys(data);
+                const goodRatings = labels.map(item => data[item]["3"]);
+                const averageRatings = labels.map(item => data[item]["2"]);
+                const badRatings = labels.map(item => data[item]["1"]);
+
+                chartInstance = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            { label: "Good", data: goodRatings, backgroundColor: "green" },
+                            { label: "Average", data: averageRatings, backgroundColor: "orange" },
+                            { label: "Bad", data: badRatings, backgroundColor: "red" }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: { stacked: true },
+                            y: { stacked: true, beginAtZero: true }
+                        }
+                    }
+                });
+
+            } else if (chartType === "leaderboard") {
+                const sortedItems = Object.entries(data).sort((a, b) => b[1] - a[1]);
+                const labels = sortedItems.map(item => item[0]);
+                const ratings = sortedItems.map(item => item[1]);
+
+                chartInstance = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: labels,
+                        datasets: [{ label: "Average Rating", data: ratings, backgroundColor: "blue" }]
+                    },
+                    options: { responsive: true, scales: { y: { beginAtZero: true } } }
+                });
+
+            }
+ }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://localhost:90/canteenfinal/test.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Feedback System</title>
+    <link rel="stylesheet" href="./Canteen Feedback System_files/style.css">
+    <style>
+        /* General Layout */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the form */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f9;
+        }
+
+        .emoji {
+            font-size: 30px;
+        }
+
+        /* Submit Button */
+        button {
+		
+            padding: 12px 20px;
+            margin-top: 15px;
+            width: 30%;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+p{
+text-align:center;
+}
+    </style>
+
+<script>
+        function validateAndSubmit() {
+            // Find all radio buttons within a specific group or container (e.g., a div)
+            const group = document.getElementById("radioGroup").querySelectorAll("input[type='radio']");
+
+            // Check if any radio button in the group is checked
+            let isGroupChecked = false;
+            for (const radio of group) {
+                if (radio.checked) {
+                    isGroupChecked = true;
+                    break;
+                }
+            }
+
+            // If a radio button is checked, submit the form; otherwise, display a warning
+            if (isGroupChecked) {
+                document.getElementById("feedbackForm").submit();
+            } else {
+                alert("Please select an option from the group before submitting!");
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <img class="img" style="width:100%;margin:auto;height:130px;" src="./Canteen Feedback System_files/head.jpg">
+</div>
+<div class="container">
+    <h1 class="lead">Canteen Feedback Form</h1>
+ 	<form id="feedbackForm" action="http://localhost:90/canteenpvm/postfeedback.php" method="POST">
+        <h3 style="width:70%;margin:auto;">Your Feedback is very valuble to improve the quality of our food items</h3><br>
+        <table style="width:70%;margin:auto;">
+            <tbody><tr>
+                <th>Items</th>
+                <th>Good</th>
+                <th>Average</th>
+                <th>Bad</th>
+            </tr>
+
+         <tr id="radioGroup"><td>Idly</td><td><input type="radio" name="item1" value="3"> 🤩 </td><td><input type="radio" name="item1" value="2"> 😅 </td><td><input type="radio" name="item1" value="1"> 😞 </td></tr><tr id="radioGroup"><td>Sambar</td><td><input type="radio" name="item2" value="3"> 🤩 </td><td><input type="radio" name="item2" value="2"> 😅 </td><td><input type="radio" name="item2" value="1"> 😞 </td></tr><tr id="radioGroup"><td>Dosa</td><td><input type="radio" name="item3" value="3"> 🤩 </td><td><input type="radio" name="item3" value="2"> 😅 </td><td><input type="radio" name="item3" value="1"> 😞 </td></tr><tr id="radioGroup"><td>Chapati</td><td><input type="radio" name="item4" value="3"> 🤩 </td><td><input type="radio" name="item4" value="2"> 😅 </td><td><input type="radio" name="item4" value="1"> 😞 </td></tr><tr id="radioGroup"><td>Puri</td><td><input type="radio" name="item5" value="3"> 🤩 </td><td><input type="radio" name="item5" value="2"> 😅 </td><td><input type="radio" name="item5" value="1"> 😞 </td></tr><tr id="radioGroup"><td>Samosa</td><td><input type="radio" name="item6" value="3"> 🤩 </td><td><input type="radio" name="item6" value="2"> 😅 </td><td><input type="radio" name="item6" value="1"> 😞 </td></tr><tr id="radioGroup"><td>Cutlet</td><td><input type="radio" name="item7" value="3"> 🤩 </td><td><input type="radio" name="item7" value="2"> 😅 </td><td><input type="radio" name="item7" value="1"> 😞 </td></tr><tr id="radioGroup"><td>fried rice</td><td><input type="radio" name="item8" value="3"> 🤩 </td><td><input type="radio" name="item8" value="2"> 😅 </td><td><input type="radio" name="item8" value="1"> 😞 </td></tr>        </tbody></table>
+        <!-- Submit Button -->
+        <p><button type="button" onclick="validateAndSubmit()">Submit</button></p>
+    </form>
+</div>
+</body></html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://localhost:90/canteenfinal/test.php -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Feedback System</title>
+    <link rel="stylesheet" href="./Canteen Feedback System_files/style.css">
+    <style>
+        /* General Layout */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the form */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f9;
+        }
+
+        .emoji {
+            font-size: 30px;
+        }
+
+        /* Submit Button */
+        button {
+		
+            padding: 12px 20px;
+            margin-top: 15px;
+            width: 30%;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+p{
+text-align:center;
+}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <img class="img" style="width:100%;margin:auto;height:130px;" src="./Canteen Feedback System_files/head.jpg">
+</div>
+<div class="container">
+    <h1 class="lead">Canteen Feedback Form</h1>
+    <form id="feedbackForm" action="http://localhost:90/canteenfinal/postTimedate.php" method="POST">
+        <h3 style="width:70%;margin:auto;">Your Feedback is very valuble to improve the quality of our food items</h3><br>
+        <table style="width:70%;margin:auto;">
+            <tbody><tr>
+                <th>Items</th>
+                <th>Good</th>
+                <th>Average</th>
+                <th>Bad</th>
+            </tr>
+
+         <tr><td>Idly</td><td><input type="radio" name="item1" value="3"> 🤩 </td><td><input type="radio" name="item1" value="2"> 😅 </td><td><input type="radio" name="item1" value="1"> 😞 </td></tr><tr><td>Sambar</td><td><input type="radio" name="item2" value="3"> 🤩 </td><td><input type="radio" name="item2" value="2"> 😅 </td><td><input type="radio" name="item2" value="1"> 😞 </td></tr><tr><td>Dosa</td><td><input type="radio" name="item3" value="3"> 🤩 </td><td><input type="radio" name="item3" value="2"> 😅 </td><td><input type="radio" name="item3" value="1"> 😞 </td></tr><tr><td>Chapati</td><td><input type="radio" name="item4" value="3"> 🤩 </td><td><input type="radio" name="item4" value="2"> 😅 </td><td><input type="radio" name="item4" value="1"> 😞 </td></tr><tr><td>Puri</td><td><input type="radio" name="item5" value="3"> 🤩 </td><td><input type="radio" name="item5" value="2"> 😅 </td><td><input type="radio" name="item5" value="1"> 😞 </td></tr><tr><td>Samosa</td><td><input type="radio" name="item6" value="3"> 🤩 </td><td><input type="radio" name="item6" value="2"> 😅 </td><td><input type="radio" name="item6" value="1"> 😞 </td></tr><tr><td>Cutlet</td><td><input type="radio" name="item7" value="3"> 🤩 </td><td><input type="radio" name="item7" value="2"> 😅 </td><td><input type="radio" name="item7" value="1"> 😞 </td></tr><tr><td>fried rice</td><td><input type="radio" name="item8" value="3"> 🤩 </td><td><input type="radio" name="item8" value="2"> 😅 </td><td><input type="radio" name="item8" value="1"> 😞 </td></tr>        </tbody></table>
+        <!-- Submit Button -->
+        <p><button type="submit">Submit Feedback</button></p>
+    </form>
+</div>
+
+
+</body></html>

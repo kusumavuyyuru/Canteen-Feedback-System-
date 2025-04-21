@@ -1,0 +1,26 @@
+<?php
+// Step 1: Connect to the database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "canteendb";
+$conn = new mysqli($servername, $username, $password, $db);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Step 2: Fetch the average value of an item
+$sql = "SELECT AVG(item1) AS avg_value FROM canteenfeedbacksystem";
+$result = $conn->query($sql);
+$average = 0;
+
+if ($result->num_rows > 0) {
+    // Get the average value
+    $row = $result->fetch_assoc();
+    $average = $row["avg_value"];
+}
+
+$conn->close();
+?>

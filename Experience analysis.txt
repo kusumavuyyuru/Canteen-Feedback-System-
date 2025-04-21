@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Rating Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h2>Food Ratings - Bar Chart</h2>
+    <canvas id="barChart"></canvas>
+
+    <h2>Ratings Distribution - Pie Chart</h2>
+    <canvas id="pieChart"></canvas>
+
+    <h2>Ratings Overview - Doughnut Chart</h2>
+    <canvas id="doughnutChart"></canvas>
+
+    <script>
+        // Fetch data from PHP API
+        fetch('ratings.php')
+        .then(response => response.json())
+        .then(data => {
+            const items = data.map(d => d.item);
+            const ratings = data.map(d => d.rating);
+            const categories = data.map(d => d.category);
+
+            // Count category occurrences
+            const categoryCounts = { Good: 0, Average: 0, Bad: 0 };
+            categories.forEach(cat => categoryCounts[cat]++);
+
+            // Bar Chart - Ratings per Item
+            new Chart(document.getElementById('barChart'), {
+                type: 'bar',
+                data: {
+                    labels: items,
+                    datasets: [{
+                        label: 'Ratings',
+                        data: ratings,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true, max: 5 }
+                    }
+                }
+            });
+
+            // Pie Chart - Rating Categories Distribution
+            new Chart(document.getElementById('pieChart'), {
+                type: 'pie',
+                data: {
+                    labels: ['Good', 'Average', 'Bad'],
+                    datasets: [{
+                        data: [categoryCounts.Good, categoryCounts.Average, categoryCounts.Bad],
+                        backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+                    }]
+                }
+            });
+
+            // Doughnut Chart - Category Breakdown
+            new Chart(document.getElementById('doughnutChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Good', 'Average', 'Bad'],
+                    datasets: [{
+                        data: [categoryCounts.Good, categoryCounts.Average, categoryCounts.Bad],
+                        backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+                    }]
+                }
+            });
+
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
+
+</body>
+</html>

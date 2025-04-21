@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canteen Feedback System</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 0;
+      height: auto;
+      overflow: hidden;
+    }
+    .header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Main Container */
+    .container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    /* Feedback Card */
+    .feedback-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    .feedback-card h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+    .feedback-card p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    /* Proceed Button */
+    .proceed-button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .proceed-button:hover {
+      background-color: #218838;
+    }
+    /* Footer / Credits */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+    footer p {
+      font-size: 14px;
+      color: #555;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+       <img class="img" style="width:100%;margin:auto;height:130px;" src="Canteen Feedback System_files\head.jpg">
+  </div>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="feedback-card">
+      <h2>Welcome!</h2>
+      <p>We value your feedback. Click the button below to proceed to the feedback form.</p>
+      <form action="Feedback.html">
+        <!-- Include any hidden inputs if needed   <form action="https://pvpsit-canteen-feedback.rf.gd/"> -->
+        <a href='thanks.html'><button class="proceed-button" type="submit">Proceed to Feedback</button></a>
+      </form>
+    </div>
+  </div>
+  <!-- Footer / Credits -->
+  <footer>
+    <p>Developed by: Team Us</p>
+  </footer>
+</body>
+</html>
